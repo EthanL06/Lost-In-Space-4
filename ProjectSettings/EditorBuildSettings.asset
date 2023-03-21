@@ -9,6 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: 65e031cc8ea8d0547ba360fc29496d38
   - enabled: 1
-    path: Assets/Mars Landscape 3D/Scenes/Mars Landscape 3D Overview.unity
+    path: Assets/Mars%20Landscape%203D/Mars%20Landscape%203D/Scenes/Mars Landscape
+      3D Overview.unity
     guid: 35f6fba4bd33a3e41988d72955c10572
   m_configObjects: {}
