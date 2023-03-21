@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     // Add slider between 0 and 100
     [Range(0, 100)]
-    public float Health = 100f;
+    public float Health = 100;
 
     [Range(0, 100)]
     public float JetpackFuel = 100f;
