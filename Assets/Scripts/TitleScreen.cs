@@ -30,6 +30,11 @@ public class TitleScreen : MonoBehaviour
         Application.Quit();
     }
 
+    public void Settings()
+    {
+        SceneManager.LoadScene(2);
+    }
+
     IEnumerator LoadScene()
     {
         animator.SetTrigger("Start");
