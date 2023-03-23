@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class End : MonoBehaviour
 {
     public Cinemachine.CinemachineFreeLook freelook;
@@ -11,6 +11,7 @@ public class End : MonoBehaviour
     public Dialogue dialogue;
     public Canvas playerUI;
     public Animator shipAnimator;
+    public AudioSource launchSound;
     public CollectibleManager collectibleManager;
 
     private IEnumerator Play() {
@@ -31,6 +32,11 @@ public class End : MonoBehaviour
         freelook.LookAt = ship.GetComponent<Transform>();
 
         shipAnimator.Play("Launch");
+        launchSound.PlayOneShot(launchSound.clip);
+
+        yield return new WaitForSeconds(10);
+
+        SceneManager.LoadScene(0);
     }
 
     private void OnTriggerEnter(Collider other) {
