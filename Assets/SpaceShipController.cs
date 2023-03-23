@@ -22,6 +22,7 @@ public class SpaceShipController : MonoBehaviour
     float mouseXSmooth = 0;
     float mouseYSmooth = 0;
     Vector3 defaultShipRotation;
+    float rotationY;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,7 @@ public class SpaceShipController : MonoBehaviour
         lookRotation = transform.rotation;
         defaultShipRotation = spaceshipRoot.localEulerAngles;
         rotationZ = defaultShipRotation.z;
+        rotationY = defaultShipRotation.y;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -63,28 +65,25 @@ public class SpaceShipController : MonoBehaviour
         float rotationZTmp = 0;
         if (Input.GetKey(KeyCode.A))
         {
-            rotationZTmp = 10;
+            rotationZTmp = 12;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            rotationZTmp = -10;
+            rotationZTmp = -12;
         }
+//make a script to smoothly rotate the ship in the y axis only
 
-if(Input.GetKey(KeyCode.A)){
-  left = -1;
-}
-else if(Input.GetKey(KeyCode.D)){
-  left = 1;
-}
-transform.Rotate(0, left , 0);
         mouseXSmooth = Mathf.Lerp(mouseXSmooth, Input.GetAxis("Mouse X") * rotationSpeed, Time.deltaTime * cameraSmooth);
         mouseYSmooth = Mathf.Lerp(mouseYSmooth, Input.GetAxis("Mouse Y") * rotationSpeed, Time.deltaTime * cameraSmooth);
         Quaternion localRotation = Quaternion.Euler(-mouseYSmooth, mouseXSmooth, rotationZTmp * rotationSpeed);
         lookRotation = lookRotation * localRotation;
-        transform.rotation = lookRotation;
+        rotationY-=mouseYSmooth;
+        rotationY = Mathf.Clamp(0, rotationZ/2, 0);
         rotationZ -= mouseXSmooth;
         rotationZ = Mathf.Clamp(rotationZ, -45, 45);
+        
         spaceshipRoot.transform.localEulerAngles = new Vector3(defaultShipRotation.x, defaultShipRotation.y, rotationZ);
         rotationZ = Mathf.Lerp(rotationZ, defaultShipRotation.z, Time.deltaTime * cameraSmooth);
-    }
+    }   
+        
 }
