@@ -53,6 +53,7 @@ public class Dialogue : MonoBehaviour
         StopAllCoroutines();
         canvas.GetComponent<Canvas>().enabled = false;
         playerUI.GetComponent<Canvas>().enabled = true;
+        lines = new string[] { };
     }
 
     void StartDialogue() {
