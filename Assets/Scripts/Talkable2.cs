@@ -22,8 +22,7 @@ public class Talkable2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (!hasPlayed && other.gameObject.tag == "Player") {
-            dialogue.PlayLines(lines);
-            hasPlayed = true;
+            dialogue.PlayLinesWithOptions(lines);
         }
     }
 

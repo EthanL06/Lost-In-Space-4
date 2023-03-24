@@ -12,10 +12,20 @@ public class Dialogue : MonoBehaviour
     private bool isTyping = false;
     private int index;
     public Canvas playerUI;
+    public GameObject buttonOne;
+    public GameObject buttonTwo;
+    public bool hasOptions = false;
+    public List<string[]> options = new List<string[]>();
 
     // Start is called before the first frame update
     void Start()
     {
+        options.Add(new string[] {"Uh, hi?", "Who are you?"});
+        options.Add(new string[]{"I can help you!", "Me too."});
+        options.Add(new string[]{"Yes...", "Yep!"});
+        options.Add(new string[]{"Okay.", "You bet!"});
+
+
         textComponent.text = string.Empty;
         StartDialogue();
     }
@@ -48,6 +58,14 @@ public class Dialogue : MonoBehaviour
         StartDialogue();
     }
 
+    public void PlayLinesWithOptions(string[] lines) {
+        textComponent.text = string.Empty;
+        canvas.GetComponent<Canvas>().enabled = true;
+        this.lines = lines;
+        hasOptions = true;
+        StartDialogue();
+    }
+
     public void StopDialogue() {
         textComponent.text = string.Empty;
         StopAllCoroutines();
@@ -69,6 +87,14 @@ public class Dialogue : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
         isTyping = false;
+
+        if (hasOptions) {
+            ShowOptions(options[index]);
+        }
+
+        if (index == lines.Length - 1) {
+            hasOptions = false;
+        }
     }
 
     void NextLine() {
@@ -80,4 +106,18 @@ public class Dialogue : MonoBehaviour
             canvas.GetComponent<Canvas>().enabled = false;
         }
     }
+
+    public void ShowOptions(string[] options) {
+        buttonOne.GetComponentInChildren<TextMeshProUGUI>().text = options[0];
+        buttonTwo.GetComponentInChildren<TextMeshProUGUI>().text = options[1];
+
+        buttonOne.SetActive(true);
+        buttonTwo.SetActive(true);
+    }
+
+    public void HideOptions() {
+        buttonOne.SetActive(false);
+        buttonTwo.SetActive(false);
+    }
+    
 }
