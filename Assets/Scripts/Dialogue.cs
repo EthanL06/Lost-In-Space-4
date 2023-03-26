@@ -63,7 +63,9 @@ public class Dialogue : MonoBehaviour
         canvas.GetComponent<Canvas>().enabled = true;
         this.lines = lines;
         hasOptions = true;
+
         StartDialogue();
+        
     }
 
     public void StopDialogue() {
@@ -88,19 +90,23 @@ public class Dialogue : MonoBehaviour
         }
         isTyping = false;
 
-        if (hasOptions) {
-            ShowOptions(options[index]);
-        }
+        Debug.Log("hasOptions: " + hasOptions);
+        Debug.Log("index: " + index);
 
-        if (index == lines.Length - 1) {
-            hasOptions = false;
-        }
+
+
     }
 
     void NextLine() {
         if (index < lines.Length - 1) {
             index++;
             textComponent.text = string.Empty;
+            if (index == lines.Length - 1) {
+                hasOptions = false;
+            }
+            if (hasOptions) {
+                ShowOptions(options[index]);
+            }
             StartCoroutine(TypeLine());
         } else {
             canvas.GetComponent<Canvas>().enabled = false;

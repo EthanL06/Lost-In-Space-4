@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     [Range(0, 100)]
     public float JetpackFuel = 100f;
+    public float JetpackUseRate = 0.5f;
 
 
     // Start is called before the first frame update
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void UseJetpack(float amount) {
-        JetpackFuel -= amount;
+        JetpackFuel -= JetpackUseRate;
         if (JetpackFuel < 0) {
             JetpackFuel = 0;
         }

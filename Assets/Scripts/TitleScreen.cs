@@ -7,6 +7,8 @@ public class TitleScreen : MonoBehaviour
 {
 
     public Animator animator;
+    public GameObject controlsMenu;
+    public GameObject[] mainMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,13 @@ public class TitleScreen : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void MoveToControls() {
+        foreach (GameObject menu in mainMenu) {
+            menu.SetActive(false);
+        }
+        controlsMenu.SetActive(true);
     }
 
     public void StartGame()
