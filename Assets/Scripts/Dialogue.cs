@@ -39,8 +39,10 @@ public class Dialogue : MonoBehaviour
                 textComponent.text = lines[index];
                 isTyping = false;
             } else if (textComponent.text == lines[index]) {
+                Debug.Log("Next Line " + index);
                 NextLine();
             } else {
+                Debug.Log("Stop Dialogue");
                 StopDialogue();
             }
         }
@@ -69,6 +71,7 @@ public class Dialogue : MonoBehaviour
     }
 
     public void StopDialogue() {
+        Debug.Log("Stop Dialogue");
         textComponent.text = string.Empty;
         StopAllCoroutines();
         canvas.GetComponent<Canvas>().enabled = false;
@@ -110,6 +113,7 @@ public class Dialogue : MonoBehaviour
             StartCoroutine(TypeLine());
         } else {
             canvas.GetComponent<Canvas>().enabled = false;
+            playerUI.GetComponent<Canvas>().enabled = true;
         }
     }
 
